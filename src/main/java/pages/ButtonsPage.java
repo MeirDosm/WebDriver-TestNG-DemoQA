@@ -1,9 +1,13 @@
 package pages;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.HighlightUtil;
 
 public class ButtonsPage extends AbstractPage {
 
@@ -22,12 +26,14 @@ public class ButtonsPage extends AbstractPage {
     public void doubleClick() {
         hideAd(By.id("adplus-banner"));
         WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(doubleClickBtn));
+        HighlightUtil.highlightElement(driver, btn);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btn);
         new Actions(driver).pause(Duration.ofMillis(200)).doubleClick(btn).perform();
     }
 
     public void rightClick() {
         WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(rightClickBtn));
+        HighlightUtil.highlightElement(driver, btn);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btn);
         new Actions(driver).pause(Duration.ofMillis(200)).contextClick(btn).perform();
     }
@@ -40,7 +46,7 @@ public class ButtonsPage extends AbstractPage {
     public String getDoubleClickMessage() {
         try {
             return wait.until(ExpectedConditions.visibilityOfElementLocated(doubleClickMsg)).getText();
-        } catch (TimeoutException e) {
+        } catch (Exception e) {
             return "DoubleClick message not found";
         }
     }
@@ -48,7 +54,7 @@ public class ButtonsPage extends AbstractPage {
     public String getRightClickMessage() {
         try {
             return wait.until(ExpectedConditions.visibilityOfElementLocated(rightClickMsg)).getText();
-        } catch (TimeoutException e) {
+        } catch (Exception e) {
             return "RightClick message not found";
         }
     }
@@ -56,7 +62,7 @@ public class ButtonsPage extends AbstractPage {
     public String getClickMeMessage() {
         try {
             return wait.until(ExpectedConditions.visibilityOfElementLocated(clickMeMsg)).getText();
-        } catch (TimeoutException e) {
+        } catch (Exception e) {
             return "ClickMe message not found";
         }
     }

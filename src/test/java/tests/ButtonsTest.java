@@ -1,46 +1,34 @@
 package tests;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.ButtonsPage;
+import org.testng.annotations.Listeners;
+import listeners.TestListener;
 
-public class ButtonsTest {
+@Listeners(TestListener.class)
+public class ButtonsTest extends BaseTest {
 
-    private WebDriver driver;
     private ButtonsPage buttonsPage;
 
-    @BeforeClass
-    public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+    @BeforeMethod
+    public void setupPage() {
         driver.get("https://demoqa.com/buttons");
         buttonsPage = new ButtonsPage(driver);
     }
 
     @Test
     public void testButtons() {
-        // Double Click
         buttonsPage.doubleClick();
         String doubleMsg = buttonsPage.getDoubleClickMessage();
         Assert.assertEquals(doubleMsg, "You have done a double click", "Double click failed");
 
-        // Right Click
         buttonsPage.rightClick();
         String rightMsg = buttonsPage.getRightClickMessage();
         Assert.assertEquals(rightMsg, "You have done a right click", "Right click failed");
 
-        // Dynamic Click
         buttonsPage.clickMe();
         String clickMsg = buttonsPage.getClickMeMessage();
         Assert.assertEquals(clickMsg, "You have done a dynamic click", "Click Me failed");
-    }
-
-    @AfterClass
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
     }
 }

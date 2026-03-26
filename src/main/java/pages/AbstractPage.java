@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.HighlightUtil;
 
 import java.time.Duration;
 
@@ -17,8 +18,16 @@ public abstract class AbstractPage {
 
     protected void click(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+        HighlightUtil.highlightElement(driver, element);
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView(true); arguments[0].click();", element);
+    }
+
+    protected void type(WebElement element, String text) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        HighlightUtil.highlightElement(driver, element);
+        element.clear();
+        element.sendKeys(text);
     }
 
     protected WebElement waitVisible(By locator) {

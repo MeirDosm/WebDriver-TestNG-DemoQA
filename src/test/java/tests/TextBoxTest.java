@@ -3,7 +3,10 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.TextBoxPage;
+import org.testng.annotations.Listeners;
+import listeners.TestListener;
 
+@Listeners(TestListener.class)
 public class TextBoxTest extends BaseTest {
     private TextBoxPage textBoxPage;
 
