@@ -1,18 +1,22 @@
-# WebDriver + Java + TestNG Project
+# Test Automation Framework
 
-## Description
-Automated UI tests for DemoQA using Selenium WebDriver.
+Test Automation Framework for [DemoQA](https://demoqa.com) using Java, Selenium WebDriver, and TestNG.  
+Supports multiple browsers, environments, logging, screenshots on failure, smoke & regression suites.
 
-## Implemented Scenarios
-1. Text Box form submission
-2. Buttons interactions (double click, right click, dynamic click)
-3. Checkbox selection
+## Technologies
+Java | Selenium WebDriver | TestNG | Maven | Log4j2 | WebDriverManager
 
 ## Features
-- Page Object Model with AbstractPage
-- Explicit and implicit waits
-- Multiple locator strategies (ID, XPath, CSS)
-- WebDriver API usage (Actions, navigation)
+- Page Object Model
+- Environment configs via property files
+- Smoke & Regression suites
+- Screenshots on test failure
+- Logging & element highlighting
 
-## How to run
-Run tests via TestNG in IntelliJ or using Maven.
+## Run Tests
+Smoke: `mvn test -DsuiteXmlFile=smoke.xml`  
+Regression: `mvn test -DsuiteXmlFile=regression.xml`
+
+## Logs & Screenshots
+Logs → `logs/`  
+Screenshots → `screenshots/` (only on failures)

@@ -3,7 +3,10 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.CheckboxPage;
+import org.testng.annotations.Listeners;
+import listeners.TestListener;
 
+@Listeners(TestListener.class)
 public class CheckboxTest extends BaseTest {
     private CheckboxPage checkboxPage;
 

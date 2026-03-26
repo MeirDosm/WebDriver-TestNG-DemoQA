@@ -1,26 +1,41 @@
 package tests;
 
+import driver.DriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
-import java.time.Duration;
+import utils.ConfigReader;
+import org.apache.logging.log4j.Logger;
+import utils.LoggerUtil;
 
 public class BaseTest {
     protected WebDriver driver;
+    protected Logger log = LoggerUtil.getLogger(this.getClass());
 
     @BeforeMethod
     public void setUp() {
-        driver = new ChromeDriver();
+        String env = System.getProperty("env", "dev");
+        ConfigReader.load(env);
+
+        String browser = ConfigReader.get("browser");
+        String url = ConfigReader.get("url");
+
+        log.info("=== Starting test on browser: " + browser + ", URL: " + url + " ===");
+
+        driver = DriverManager.getDriver(browser);
+        driver.get(url);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        log.debug("Driver initialized and URL opened");
     }
 
     @AfterMethod
     public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+        log.info("=== Closing browser ===");
+        DriverManager.quitDriver();
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }
