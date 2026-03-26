@@ -21,17 +21,14 @@ public class ButtonsTest {
 
     @Test
     public void testButtons() {
-        // Double Click
         buttonsPage.doubleClick();
         String doubleMsg = buttonsPage.getDoubleClickMessage();
         Assert.assertEquals(doubleMsg, "You have done a double click", "Double click failed");
 
-        // Right Click
         buttonsPage.rightClick();
         String rightMsg = buttonsPage.getRightClickMessage();
         Assert.assertEquals(rightMsg, "You have done a right click", "Right click failed");
 
-        // Dynamic Click
         buttonsPage.clickMe();
         String clickMsg = buttonsPage.getClickMeMessage();
         Assert.assertEquals(clickMsg, "You have done a dynamic click", "Click Me failed");
