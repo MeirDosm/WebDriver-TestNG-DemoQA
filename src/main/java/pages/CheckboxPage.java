@@ -38,7 +38,7 @@ public class CheckboxPage extends AbstractPage {
         }
     }
 
-    public boolean allSelected() {
+    public boolean isAllSelected() {
         List<WebElement> boxes = driver.findElements(checkboxes);
         for (WebElement box : boxes) {
             if (!box.getAttribute("class").contains("rc-tree-checkbox-checked")) {

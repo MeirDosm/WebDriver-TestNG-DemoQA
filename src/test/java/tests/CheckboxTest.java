@@ -20,6 +20,6 @@ public class CheckboxTest extends BaseTest {
     public void testCheckboxSelection() {
         checkboxPage.expandAll();
         checkboxPage.selectAll();
-        Assert.assertTrue(checkboxPage.allSelected(), "Not all checkboxes were selected!");
+        Assert.assertTrue(checkboxPage.isAllSelected(), "Not all checkboxes were selected!");
     }
 }
