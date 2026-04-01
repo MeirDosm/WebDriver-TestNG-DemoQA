@@ -13,8 +13,8 @@ public class ButtonsTest extends BaseTest {
 
     @BeforeMethod
     public void setupPage() {
-        driver.get("https://demoqa.com/buttons");
         buttonsPage = new ButtonsPage(driver);
+        buttonsPage.open();
     }
 
     @Test

@@ -3,7 +3,6 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-
 public class TextBoxPage extends AbstractPage {
 
     private By fullNameField = By.id("userName");
@@ -17,6 +16,10 @@ public class TextBoxPage extends AbstractPage {
         super(driver);
     }
 
+    public void open() {
+        driver.get("https://demoqa.com/text-box");
+    }
+
     public void fillForm(String name, String email, String currentAddress, String permanentAddress) {
         hideAd(By.id("adplus-banner"));
 
@@ -27,6 +30,7 @@ public class TextBoxPage extends AbstractPage {
     }
 
     public void submitForm() {
+        hideAd(By.id("adplus-banner"));
         click(driver.findElement(submitBtn));
     }
 

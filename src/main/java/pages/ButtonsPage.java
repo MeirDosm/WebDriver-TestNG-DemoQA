@@ -1,13 +1,9 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import driver.WebElementDecorator;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.HighlightUtil;
 
 public class ButtonsPage extends AbstractPage {
 
@@ -23,29 +19,47 @@ public class ButtonsPage extends AbstractPage {
         super(driver);
     }
 
+    public void open() {
+        driver.get("https://demoqa.com/buttons");
+    }
+
     public void doubleClick() {
         hideAd(By.id("adplus-banner"));
-        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(doubleClickBtn));
-        HighlightUtil.highlightElement(driver, btn);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btn);
-        new Actions(driver).pause(Duration.ofMillis(200)).doubleClick(btn).perform();
+        WebElement btn = waitClickable(doubleClickBtn);
+
+        WebElement rawBtn = btn instanceof WebElementDecorator
+                ? ((WebElementDecorator) btn).getWrappedElement()
+                : btn;
+        WebDriver rawDriver = driver instanceof driver.WebDriverDecorator
+                ? ((driver.WebDriverDecorator) driver).getDriver()
+                : driver;
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", rawBtn);
+        new Actions(rawDriver).pause(Duration.ofMillis(200)).doubleClick(rawBtn).perform();
     }
 
     public void rightClick() {
-        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(rightClickBtn));
-        HighlightUtil.highlightElement(driver, btn);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btn);
-        new Actions(driver).pause(Duration.ofMillis(200)).contextClick(btn).perform();
+        WebElement btn = waitClickable(rightClickBtn);
+
+        WebElement rawBtn = btn instanceof WebElementDecorator
+                ? ((WebElementDecorator) btn).getWrappedElement()
+                : btn;
+        WebDriver rawDriver = driver instanceof driver.WebDriverDecorator
+                ? ((driver.WebDriverDecorator) driver).getDriver()
+                : driver;
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", rawBtn);
+        new Actions(rawDriver).pause(Duration.ofMillis(200)).contextClick(rawBtn).perform();
     }
 
     public void clickMe() {
-        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(clickMeBtn));
+        WebElement btn = waitClickable(clickMeBtn);
         click(btn);
     }
 
     public String getDoubleClickMessage() {
         try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(doubleClickMsg)).getText();
+            return waitVisible(doubleClickMsg).getText();
         } catch (Exception e) {
             return "DoubleClick message not found";
         }
@@ -53,7 +67,7 @@ public class ButtonsPage extends AbstractPage {
 
     public String getRightClickMessage() {
         try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(rightClickMsg)).getText();
+            return waitVisible(rightClickMsg).getText();
         } catch (Exception e) {
             return "RightClick message not found";
         }
@@ -61,7 +75,7 @@ public class ButtonsPage extends AbstractPage {
 
     public String getClickMeMessage() {
         try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(clickMeMsg)).getText();
+            return waitVisible(clickMeMsg).getText();
         } catch (Exception e) {
             return "ClickMe message not found";
         }

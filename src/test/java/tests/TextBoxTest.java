@@ -12,8 +12,8 @@ public class TextBoxTest extends BaseTest {
 
     @BeforeMethod
     public void setupPage() {
-        driver.get("https://demoqa.com/text-box");
         textBoxPage = new TextBoxPage(driver);
+        textBoxPage.open();
     }
 
     @Test

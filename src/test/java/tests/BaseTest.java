@@ -15,10 +15,10 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         String env = System.getProperty("env", "dev");
-        ConfigReader.load(env);
+        ConfigReader config = ConfigReader.getInstance(env);
 
-        String browser = ConfigReader.get("browser");
-        String url = ConfigReader.get("url");
+        String browser = config.get("browser");
+        String url = config.get("url");
 
         log.info("=== Starting test on browser: " + browser + ", URL: " + url + " ===");
 

@@ -14,6 +14,10 @@ public class CheckboxPage extends AbstractPage {
         super(driver);
     }
 
+    public void open() {
+        driver.get("https://demoqa.com/checkbox");
+    }
+
     public void expandAll() {
         hideAd(By.id("adplus-banner"));
         List<WebElement> expandBtnList = driver.findElements(expandAllBtn);

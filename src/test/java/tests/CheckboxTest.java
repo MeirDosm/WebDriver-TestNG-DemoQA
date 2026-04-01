@@ -12,8 +12,8 @@ public class CheckboxTest extends BaseTest {
 
     @BeforeMethod
     public void setupPage() {
-        driver.get("https://demoqa.com/checkbox");
         checkboxPage = new CheckboxPage(driver);
+        checkboxPage.open();
     }
 
     @Test

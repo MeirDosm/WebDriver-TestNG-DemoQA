@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigReader {
-    private static Properties properties = new Properties();
 
-    public static void load(String env) {
+    private static ConfigReader instance;
+    private Properties properties;
+
+    private ConfigReader(String env) {
+        properties = new Properties();
         try {
             FileInputStream fis = new FileInputStream(
                     "src/main/resources/config/env-" + env + ".properties"
@@ -15,11 +18,18 @@ public class ConfigReader {
             properties.load(fis);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to load config file for env: " + env);
+            throw new RuntimeException("Failed to load config for env: " + env);
         }
     }
 
-    public static String get(String key) {
+    public static ConfigReader getInstance(String env) {
+        if (instance == null) {
+            instance = new ConfigReader(env);
+        }
+        return instance;
+    }
+
+    public String get(String key) {
         return properties.getProperty(key);
     }
 }

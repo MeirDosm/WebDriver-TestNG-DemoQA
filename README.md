@@ -1,22 +1,18 @@
-# Test Automation Framework
+# Test Automation Framework Updates
 
-Test Automation Framework for [DemoQA](https://demoqa.com) using Java, Selenium WebDriver, and TestNG.  
-Supports multiple browsers, environments, logging, screenshots on failure, smoke & regression suites.
+## Design Patterns Implemented
+- **Singleton:** `DriverManager` ensures one WebDriver instance.
+- **Factory Method:** `DriverFactory` creates browser-specific drivers.
+- **Decorator:** `WebDriverDecorator` and `WebElementDecorator` add logging, highlighting, and screenshot support.
 
-## Technologies
-Java | Selenium WebDriver | TestNG | Maven | Log4j2 | WebDriverManager
-
-## Features
+## Framework Features
 - Page Object Model
-- Environment configs via property files
-- Smoke & Regression suites
-- Screenshots on test failure
-- Logging & element highlighting
+- Logging and element highlighting
+- Screenshot support
+- Config-based environment setup
 
-## Run Tests
-Smoke: `mvn test -DsuiteXmlFile=smoke.xml`  
-Regression: `mvn test -DsuiteXmlFile=regression.xml`
+## Test Results
+- ✅ All tests pass: `ButtonsTest`, `CheckboxTest`, `TextBoxTest`
 
-## Logs & Screenshots
-Logs → `logs/`  
-Screenshots → `screenshots/` (only on failures)
+## Notes
+- Code follows S.O.L.I.D. principles
