@@ -1,9 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class TextBoxPage extends AbstractPage {
 
@@ -18,30 +16,22 @@ public class TextBoxPage extends AbstractPage {
         super(driver);
     }
 
+    public void open() {
+        driver.get("https://demoqa.com/text-box");
+    }
+
     public void fillForm(String name, String email, String currentAddress, String permanentAddress) {
         hideAd(By.id("adplus-banner"));
 
-        WebElement nameField = driver.findElement(fullNameField);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", nameField);
-        nameField.clear();
-        nameField.sendKeys(name);
-
-        WebElement emailFld = driver.findElement(emailField);
-        emailFld.clear();
-        emailFld.sendKeys(email);
-
-        WebElement currentFld = driver.findElement(currentAddressField);
-        currentFld.clear();
-        currentFld.sendKeys(currentAddress);
-
-        WebElement permanentFld = driver.findElement(permanentAddressField);
-        permanentFld.clear();
-        permanentFld.sendKeys(permanentAddress);
+        type(driver.findElement(fullNameField), name);
+        type(driver.findElement(emailField), email);
+        type(driver.findElement(currentAddressField), currentAddress);
+        type(driver.findElement(permanentAddressField), permanentAddress);
     }
 
     public void submitForm() {
-        WebElement btn = driver.findElement(submitBtn);
-        click(btn);
+        hideAd(By.id("adplus-banner"));
+        click(driver.findElement(submitBtn));
     }
 
     public String getOutput() {

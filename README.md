@@ -1,18 +1,18 @@
-# WebDriver + Java + TestNG Project
+# Test Automation Framework Updates
 
-## Description
-Automated UI tests for DemoQA using Selenium WebDriver.
+## Design Patterns Implemented
+- **Singleton:** `DriverManager` ensures one WebDriver instance.
+- **Factory Method:** `DriverFactory` creates browser-specific drivers.
+- **Decorator:** `WebDriverDecorator` and `WebElementDecorator` add logging, highlighting, and screenshot support.
 
-## Implemented Scenarios
-1. Text Box form submission
-2. Buttons interactions (double click, right click, dynamic click)
-3. Checkbox selection
+## Framework Features
+- Page Object Model
+- Logging and element highlighting
+- Screenshot support
+- Config-based environment setup
 
-## Features
-- Page Object Model with AbstractPage
-- Explicit and implicit waits
-- Multiple locator strategies (ID, XPath, CSS)
-- WebDriver API usage (Actions, navigation)
+## Test Results
+- ✅ All tests pass: `ButtonsTest`, `CheckboxTest`, `TextBoxTest`
 
-## How to run
-Run tests via TestNG in IntelliJ or using Maven.
+## Notes
+- Code follows S.O.L.I.D. principles
