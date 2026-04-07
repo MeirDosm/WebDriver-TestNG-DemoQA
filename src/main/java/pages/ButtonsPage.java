@@ -1,8 +1,8 @@
 package pages;
 
+import driver.WebElementDecorator;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
 
 public class ButtonsPage extends AbstractPage {
@@ -19,44 +19,64 @@ public class ButtonsPage extends AbstractPage {
         super(driver);
     }
 
+    public void open() {
+        driver.get("https://demoqa.com/buttons");
+    }
+
     public void doubleClick() {
         hideAd(By.id("adplus-banner"));
-        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(doubleClickBtn));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btn);
-        new Actions(driver).pause(Duration.ofMillis(200)).doubleClick(btn).perform();
+        WebElement btn = waitClickable(doubleClickBtn);
+
+        WebElement rawBtn = btn instanceof WebElementDecorator
+                ? ((WebElementDecorator) btn).getWrappedElement()
+                : btn;
+        WebDriver rawDriver = driver instanceof driver.WebDriverDecorator
+                ? ((driver.WebDriverDecorator) driver).getDriver()
+                : driver;
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", rawBtn);
+        new Actions(rawDriver).pause(Duration.ofMillis(200)).doubleClick(rawBtn).perform();
     }
 
     public void rightClick() {
-        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(rightClickBtn));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btn);
-        new Actions(driver).pause(Duration.ofMillis(200)).contextClick(btn).perform();
+        WebElement btn = waitClickable(rightClickBtn);
+
+        WebElement rawBtn = btn instanceof WebElementDecorator
+                ? ((WebElementDecorator) btn).getWrappedElement()
+                : btn;
+        WebDriver rawDriver = driver instanceof driver.WebDriverDecorator
+                ? ((driver.WebDriverDecorator) driver).getDriver()
+                : driver;
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", rawBtn);
+        new Actions(rawDriver).pause(Duration.ofMillis(200)).contextClick(rawBtn).perform();
     }
 
     public void clickMe() {
-        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(clickMeBtn));
+        WebElement btn = waitClickable(clickMeBtn);
         click(btn);
     }
 
     public String getDoubleClickMessage() {
         try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(doubleClickMsg)).getText();
-        } catch (TimeoutException e) {
+            return waitVisible(doubleClickMsg).getText();
+        } catch (Exception e) {
             return "DoubleClick message not found";
         }
     }
 
     public String getRightClickMessage() {
         try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(rightClickMsg)).getText();
-        } catch (TimeoutException e) {
+            return waitVisible(rightClickMsg).getText();
+        } catch (Exception e) {
             return "RightClick message not found";
         }
     }
 
     public String getClickMeMessage() {
         try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(clickMeMsg)).getText();
-        } catch (TimeoutException e) {
+            return waitVisible(clickMeMsg).getText();
+        } catch (Exception e) {
             return "ClickMe message not found";
         }
     }

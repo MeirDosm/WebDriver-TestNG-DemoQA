@@ -1,16 +1,19 @@
 package tests;
 
-import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.TextBoxPage;
+import org.testng.annotations.Listeners;
+import listeners.TestListener;
+import org.testng.asserts.SoftAssert;
 
+@Listeners(TestListener.class)
 public class TextBoxTest extends BaseTest {
     private TextBoxPage textBoxPage;
 
     @BeforeMethod
     public void setupPage() {
-        driver.get("https://demoqa.com/text-box");
         textBoxPage = new TextBoxPage(driver);
+        textBoxPage.open();
     }
 
     @Test
@@ -24,9 +27,13 @@ public class TextBoxTest extends BaseTest {
         textBoxPage.submitForm();
 
         String output = textBoxPage.getOutput();
-        Assert.assertTrue(output.contains("John Doe"));
-        Assert.assertTrue(output.contains("john@example.com"));
-        Assert.assertTrue(output.contains("123 Main St"));
-        Assert.assertTrue(output.contains("456 Elm St"));
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(output.contains("John Doe"), "Name is incorrect");
+        softAssert.assertTrue(output.contains("john@example.com"), "Email is incorrect");
+        softAssert.assertTrue(output.contains("123 Main St"), "Current address is incorrect");
+        softAssert.assertTrue(output.contains("456 Elm St"), "Permanent address is incorrect");
+
+        softAssert.assertAll();
     }
 }
