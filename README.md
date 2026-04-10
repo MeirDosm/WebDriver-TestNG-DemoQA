@@ -1,18 +1,24 @@
-# Test Automation Framework Updates
+Test Automation Framework with ReportPortal Integration
+Overview
 
-## Design Patterns Implemented
-- **Singleton:** `DriverManager` ensures one WebDriver instance.
-- **Factory Method:** `DriverFactory` creates browser-specific drivers.
-- **Decorator:** `WebDriverDecorator` and `WebElementDecorator` add logging, highlighting, and screenshot support.
+Java + Selenium + TestNG automation framework with ReportPortal integration for UI testing.
 
-## Framework Features
-- Page Object Model
-- Logging and element highlighting
-- Screenshot support
-- Config-based environment setup
+Tech Stack
 
-## Test Results
-- ✅ All tests pass: `ButtonsTest`, `CheckboxTest`, `TextBoxTest`
+Java, Selenium, TestNG, Maven, ReportPortal
 
-## Notes
-- Code follows S.O.L.I.D. principles
+Run Tests
+
+mvn clean test
+or via testng.xml
+
+Reporting
+
+ReportPortal integration
+PASS/FAIL execution tracking
+Logs and reports per test run
+
+Failures
+
+Screenshots captured on failure
+Stored locally and attached to ReportPortal
