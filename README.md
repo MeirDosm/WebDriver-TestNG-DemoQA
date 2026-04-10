@@ -21,4 +21,4 @@ Logs and reports per test run
 Failures
 
 Screenshots captured on failure
-Stored locally and attached to ReportPortal
+Stored locally 
