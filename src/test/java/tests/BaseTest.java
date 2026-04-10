@@ -8,6 +8,7 @@ import utils.ConfigReader;
 import org.apache.logging.log4j.Logger;
 import utils.LoggerUtil;
 
+
 public class BaseTest {
     protected WebDriver driver;
     protected Logger log = LoggerUtil.getLogger(this.getClass());
