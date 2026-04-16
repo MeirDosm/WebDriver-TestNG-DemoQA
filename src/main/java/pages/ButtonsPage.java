@@ -47,7 +47,6 @@ public class ButtonsPage extends AbstractPage {
         WebDriver rawDriver = driver instanceof driver.WebDriverDecorator
                 ? ((driver.WebDriverDecorator) driver).getDriver()
                 : driver;
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", rawBtn);
         new Actions(rawDriver).pause(Duration.ofMillis(200)).contextClick(rawBtn).perform();
     }

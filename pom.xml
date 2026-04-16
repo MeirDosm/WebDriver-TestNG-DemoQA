@@ -54,6 +54,24 @@
             <artifactId>logger-java-log4j</artifactId>
             <version>5.1.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.15.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>7.15.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>7.15.0</version>
+        </dependency>
     </dependencies>
 
     <build>

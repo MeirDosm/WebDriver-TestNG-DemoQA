@@ -1,24 +1,55 @@
-Test Automation Framework with ReportPortal Integration
-Overview
+# Test Automation Framework with BDD
 
-Java + Selenium + TestNG automation framework with ReportPortal integration for UI testing.
+This is a UI automation framework for DemoQA using Selenium WebDriver.
 
-Tech Stack
+It supports both TestNG and Cucumber (BDD) execution and is built using Page Object Model with logging, hooks, and listeners.
 
-Java, Selenium, TestNG, Maven, ReportPortal
+## Tech Stack
+- Java
+- Selenium WebDriver
+- TestNG
+- Cucumber JVM
+- Maven
+- Log4j2
 
-Run Tests
+## Project Structure
+- pages – Page Objects
+- tests – TestNG tests
+- cucumber – Step definitions, hooks, runner
+- features – Gherkin feature files
 
-mvn clean test
-or via testng.xml
+## How to Run
 
-Reporting
+### TestNG
+Run `testng.xml`
 
-ReportPortal integration
-PASS/FAIL execution tracking
-Logs and reports per test run
+### Cucumber
+Run `CucumberRunner` class
 
-Failures
+## Features
+- Page Object Model
+- WebDriver wrapper/decorator
+- Explicit waits
+- Logging (Log4j2)
+- Cucumber BDD support
+- Scenario Outline with Examples
+- Hooks (Before/After)
+- Screenshot on failure
 
-Screenshots captured on failure
-Stored locally 
+## Example Scenario
+```gherkin
+Feature: Login functionality
+
+Background:
+  Given User opens login page
+
+Scenario Outline: Login with multiple users
+  When User enters username "<username>"
+  And User enters password "<password>"
+  And User clicks login button
+  Then User should see dashboard
+
+Examples:
+  | username      | password     |
+  | standard_user | secret_sauce |
+  | problem_user  | secret_sauce |
